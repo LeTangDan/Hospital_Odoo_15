@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="payment_history_pivot_view" model="ir.ui.view">
+            <field name="name">payment_history_pivot_view</field>
+            <field name="model">payment_history</field>
+            <field name="arch" type="xml">
+                <pivot string="Spending note" sample="1">
+                    <field name="date" type="row"/>
+                    <field name="doctor_id" type="row"/>
+                    <field name="amount" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="payment_history_view_graph" model="ir.ui.view">
+            <field name="name">payment_history_view_graph</field>
+            <field name="model">payment_history</field>
+            <field name="arch" type="xml">
+                <graph string="payment_history_view_graph" stacked="True" sample="1">
+                    <field name="date" type="row" interval="month"/>
+                    <field name="doctor_id" type="row"/>
+                    <field name="amount" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="payment_history_view_tree" model="ir.ui.view">
+            <field name="name">payment_history_view_tree</field>
+            <field name="model">payment_history</field>
+            <field name="arch" type="xml">
+                <tree string="payment_history_tree" create="0" decoration-danger="payment_time!='Thanh toán ngay'">
+                    <field name="examine_line_id" readonly="1"/>
+                    <field name="sick_persion_id" context="{'sick_persion': True}"/>
+                    <field name="address"/>
+                    <field name="date"/>
+                    <field name="payment_time" widget="badge"/>
+                    <field name="doctor_id"/>
+                    <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}" sum="Tổng"/>
+                    <field name="currency_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="payment_history_view_form" model="ir.ui.view">
+            <field name="name">payment_history_view_form</field>
+            <field name="model">payment_history</field>
+            <field name="arch" type="xml">
+                <form string="payment_history_form" create="0">
+                    <sheet>
+                        <group>
+                            <field name="examine_line_id" readonly="1"/>
+                            <field name="sick_persion_id" context="{'sick_persion': True}" readonly="1"/>
+                            <field name="address" readonly="1"/>
+                            <field name="date"/>
+                            <field name="doctor_id"/>
+                            <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="payment_time" widget="badge"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="payment_history_filter" model="ir.ui.view">
+            <field name="name">payment_history_filter</field>
+            <field name="model">payment_history</field>
+            <field name="arch" type="xml">
+                <search string="">
+                    <field name="sick_persion_id"/>
+                    <field name="date"/>
+                    <field name="doctor_id"/>
+                    <field name="address"/>
+                    <group expand="0" string="Báo cáo">
+                        <filter string="Bệnh nhân" name="group_bn" context="{'group_by':'sick_persion_id'}"/>
+                        <filter string="Bác sĩ" name="group_doctor" context="{'group_by':'doctor_id'}"/>
+                        <filter string="Tháng" name="group_date" context="{'group_by':'date:month'}"/>
+                    </group>
+                    <filter string="Tháng hiện tại" name="current_month" domain="[('date','&gt;=',context_today().strftime('%Y-%m-01')), ('date','&lt;',(context_today()+relativedelta(months=1)).strftime('%Y-%m-01'))]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="payment_history_action" model="ir.actions.act_window">
+            <field name="name">Báo cáo thu chi</field>
+            <field name="res_model">payment_history</field>
+            <field name="view_mode">tree,pivot,graph,form</field>
+            <field name="domain">[('active', '=', True)]</field>
+            <field name="context">{'sick_persion': True, 'report_view': True}</field>
+            <field name="target">main</field>
+        </record>
+
+        <record id="payment_history_view_form_create" model="ir.ui.view">
+            <field name="name">payment_history_view_form_create</field>
+            <field name="model">payment_history</field>
+            <field name="priority">1000</field>
+            <field name="arch" type="xml">
+                <form string="payment_history_form">
+                    <sheet>
+                        <group>
+                            <field name="date"/>
+                            <field name="doctor_id"/>
+                            <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="examine_line_id" invisible="1"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Lưu" name="btn_confirm" type="object" class="btn-primary"/>
+                        <button string="Hủy" class="btn-danger" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

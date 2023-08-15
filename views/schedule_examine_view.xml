@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="schedule_examine_calendar_view" model="ir.ui.view">
+            <field name="name">Lịch hẹn</field>
+            <field name="model">schedule_examine</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <calendar string="Lịch hẹn" date_start="re_examine_date" date_stop="re_examine_date" color="state" mode="month" event_open_popup="True" quick_add="False">
+                    <field name="state"/>
+                    <field name="send_auto"/>
+                    <field name="ly_do"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="schedule_examine_graph_view" model="ir.ui.view">
+            <field name="name">Lịch hẹn</field>
+            <field name="model">schedule_examine</field>
+            <field name="arch" type="xml">
+                <graph string="Lịch hẹn">
+                    <field name="re_examine_date" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="schedule_examine_tree_view" model="ir.ui.view">
+            <field name="name">Lịch hẹn</field>
+            <field name="model">schedule_examine</field>
+            <field name="arch" type="xml">
+                <tree string="Lịch hẹn" decoration-info="state=='waiting'" decoration-danger="state=='sent'" decoration-success="state=='done'" decoration-muted="state=='cancel'" default_order="re_examine_date desc">
+                    <field name="sick_persion_id" context="{'sick_persion': True}"/>
+                    <field name="re_examine_date"/>
+                    <field name="type"/>
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="send_auto"/>
+                    <field name="active" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <button name="btn_confirm_unlink" type="object" class="btn btn-danger fa fa-trash-o" attrs="{'invisible': [('active', '=' , False)]}" title="Delete"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="schedule_examine_form_view" model="ir.ui.view">
+            <field name="name">Lịch hẹn</field>
+            <field name="model">schedule_examine</field>
+            <field name="arch" type="xml">
+                <form string="Lịch hẹn">
+                    <header>
+                        <button name="btn_done" string=" Hoàn thành" type="object" class="btn btn-success fa fa-check-square-o" attrs="{'invisible': ['|',('is_create', '=', True),('state', 'in', ['done', 'cancel'])]}"/>
+                        <button name="btn_cancel" string=" Hủy lịch hẹn" type="object" class="btn btn-danger fa fa-times" attrs="{'invisible': ['|',('is_create', '=', True),('state', 'in', ['done', 'cancel'])]}"/>
+                        <button name="btn_refresh" string=" Hẹn lại" type="object" class="btn btn-primary fa fa-undo" attrs="{'invisible': ['|',('is_create', '=', True),('state', '!=', 'cancel')]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <group>
+                        <field name="sick_persion_id" required="1" context="{'sick_persion': True}" attrs="{'readonly': ['|', ('state', '!=', 'waiting'), ('is_create', '=', False)]}"/>
+                        <field name="type" attrs="{'readonly': [('state', '!=', 'waiting')]}" widget="radio" options="{'horizontal': true}"/>
+                        <field name="send_auto" attrs="{'readonly': [('state', '!=', 'waiting')]}" widget="radio" options="{'horizontal': true}"/>
+                        <field name="re_examine_date" required="1" attrs="{'readonly': [('state', '!=', 'waiting')]}"/>
+                        <field name="name" attrs="{'readonly': [('state', '!=', 'waiting')]}"/>
+                        <field name="ly_do"/>
+                    </group>
+                    <field name="is_create" invisible="1" force_save="1"/>
+                    <field name="examine_history_id" invisible="1" force_save="1"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="schedule_examine_search_view" model="ir.ui.view">
+            <field name="name">Lịch hẹn</field>
+            <field name="model">schedule_examine</field>
+            <field name="arch" type="xml">
+                <search string="Tìm kiếm">
+                    <field name="sick_persion_id"/>
+                    <field name="re_examine_date"/>
+                    <group expand="0" string="Bệnh nhân">
+                        <filter string="Bệnh nhân" name="group_customer" context="{'group_by':'sick_persion_id'}"/>
+                        <filter string="Ngày" name="group_date" context="{'group_by':'re_examine_date:day'}"/>
+                    </group>
+                    <filter string="Hôm nay" name="today" domain="[('re_examine_date','=',context_today().strftime('%Y-%m-%d'))]"/>
+                    <separator/>
+                    <filter string="Đang chờ" name="waiting" domain="[('state','=','waiting')]"/>
+                    <filter string="Đã nhắc hẹn" name="sent" domain="[('state','=','sent')]"/>
+                    <filter string="Đã khám" name="done" domain="[('state','=','done')]"/>
+                    <filter string="Đã hủy lịch hẹn" name="cancel" domain="[('state','=','cancel')]"/>
+                    <separator/>
+                    <filter string="Đã ẩn" name="hidden" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_schedule_examine" model="ir.actions.act_window">
+            <field name="name">Lịch hẹn</field>
+            <field name="res_model">schedule_examine</field>
+            <field name="view_mode">calendar,graph,tree,form</field>
+            <field name="context">{'search_default_group_date':1, 'sick_persion': True}</field>
+        </record>
+
+        <record id="action_schedule_examine_view" model="ir.actions.act_window">
+            <field name="name">Lịch hẹn</field>
+            <field name="res_model">schedule_examine</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'sick_persion': True}</field>
+        </record>
+
+        <record id="schedule_examine_form_view_create" model="ir.ui.view">
+            <field name="name">Lịch hẹn</field>
+            <field name="priority">1000</field>
+            <field name="model">schedule_examine</field>
+            <field name="arch" type="xml">
+                <form string="Lịch hẹn">
+                    <group>
+                        <field name="sick_persion_id" context="{'sick_persion': True}" readonly="context.get('default_sick_persion_id', False)" force_save="1"/>
+                        <field name="type" widget="radio" options="{'horizontal': true}"/>
+                        <field name="send_auto" widget="radio" options="{'horizontal': true}"/>
+                        <field name="re_examine_date" required="1"/>
+                        <field name="name"/>
+                        <field name="ly_do"/>
+                    </group>
+                    <field name="is_create" invisible="1" force_save="1"/>
+                    <field name="examine_history_id" invisible="1" force_save="1"/>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

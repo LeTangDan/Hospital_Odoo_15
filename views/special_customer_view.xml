@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="special_customer_kanban_view" model="ir.ui.view">
+            <field name="name">Bệnh nhân đặc biệt</field>
+            <field name="model">special_customer</field>
+            <field name="arch" type="xml">
+                <kanban create="0">
+                    <field name="id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('special_customer', 'avatar', record.id.raw_value)" t-att-title="record.sick_persion_id.value" t-att-alt="record.sick_persion_id.value"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <ul>
+                                        <li>
+                                            <h4>
+                                                <i class="fa fa-user" title="User"/>
+                                                <field name="sick_persion_id"/>
+                                            </h4>
+                                        </li>
+                                        <li>
+                                            <h6>
+                                                <i class="fa fa-calendar" title="BOD"/>
+                                                <field name="birth_day"/>
+                                            </h6>
+                                        </li>
+                                        <li>
+                                            <h6>
+                                                <i class="fa fa-phone" title="Phone"/>
+                                                <field name="phone"/>
+                                            </h6>
+                                        </li>
+                                        <li>
+                                            <h6>
+                                                <field name="customer_type_id"/>
+                                            </h6>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="special_customer_form_view" model="ir.ui.view">
+            <field name="name">Bệnh nhân đặc biệt</field>
+            <field name="model">special_customer</field>
+            <field name="arch" type="xml">
+                <form string="Bệnh nhân đặc biệt" create="0" delete="0">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            <field name="avatar" widget="image" class="oe_avatar oe_left" readonly="1" force_save="1"/>
+                        </div>
+                        <div class="oe_title col-md-10 col-sm-10 col-xs-10">
+                            <label for="sick_persion_id" class="oe_edit_only"/>
+                            <h1>
+                                <field name="sick_persion_id" readonly="1"/>
+                            </h1>
+                            <label for="birth_day"/>
+                            <field name="birth_day"/>
+                            <br/>
+                            <label for="phone"/>
+                            <field name="phone"/>
+                            <br/>
+                            <label for="customer_type_id"/>
+                            <field name="customer_type_id" readonly="1" force_save="1"/>
+                        </div>
+                    </div>
+                    <field name="company_id" invisible="1"/>
+                    <field name="examine_history_ids" readonly="1">
+                        <tree>
+                            <field name="examine_date"/>
+                            <field name="re_examine_date"/>
+                            <field name="note"/>
+                            <button name="action_view_history" string="Xem" icon="fa-eye" type="object"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group>
+                                    <field name="examine_date"/>
+                                    <field name="re_examine_date"/>
+                                    <field name="note"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="special_customer_search_view" model="ir.ui.view">
+            <field name="name">Bệnh nhân đặc biệt</field>
+            <field name="model">special_customer</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="sick_persion_id"/>
+                    <field name="customer_type_id"/>
+                    <field name="phone"/>
+                    <field name="birth_day"/>
+                    <group expand="0" string="Loại bệnh nhân">
+                        <filter string="Loại bệnh nhân" name="group_type" context="{'group_by':'customer_type_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_special_customer" model="ir.actions.act_window">
+            <field name="name">Bệnh nhân đặc biệt</field>
+            <field name="res_model">special_customer</field>
+            <field name="view_mode">kanban,form</field>
+        </record>
+
+    </data>
+</odoo>

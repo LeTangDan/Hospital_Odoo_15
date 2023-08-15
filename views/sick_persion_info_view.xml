@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="sick_persion_info_kanban_view" model="ir.ui.view">
+            <field name="name">Thông tin bệnh nhân</field>
+            <field name="model">sick_persion_info</field>
+            <field name="arch" type="xml">
+                <kanban default_order="name">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('sick_persion_info', 'avatar', record.id.raw_value)" t-att-title="record.name.value" t-att-alt="record.name.value"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <ul>
+                                        <li>
+                                            <h4>
+                                                <i class="fa fa-user" title="User"/>
+                                                <field name="name"/>
+                                            </h4>
+                                        </li>
+                                        <li>
+                                            <h6>
+                                                <i class="fa fa-calendar" title="BOD"/>
+                                                <field name="birth_day"/>
+                                            </h6>
+                                        </li>
+                                        <li>
+                                            <h6>
+                                                <i class="fa fa-phone" title="Phone"/>
+                                                <field name="phone"/>
+                                            </h6>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="sick_persion_info_tree_view" model="ir.ui.view">
+            <field name="name">Thông tin bệnh nhân</field>
+            <field name="model">sick_persion_info</field>
+            <field name="arch" type="xml">
+                <tree string="Thông tin bệnh nhân">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="gender"/>
+                    <field name="birth_day"/>
+                    <field name="age"/>
+                    <field name="phone"/>
+                    <field name="address"/>
+                    <field name="examine_date"/>
+                    <field name="company_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sick_persion_info_form_view" model="ir.ui.view">
+            <field name="name">Thông tin bệnh nhân</field>
+            <field name="model">sick_persion_info</field>
+            <field name="arch" type="xml">
+                <form string="Thông tin bệnh nhân">
+                    <header>
+                        <button name="btn_create_special_customer" type="object" string="Tạo bệnh nhân đặc biệt" class="oe_highlight" attrs="{'invisible': [('special_customer_ids', '!=', [])]}"/>
+                        <button name="btn_write_name" context="{'return': 1}" type="object" string="Upper Name" groups="base.group_system"/>
+                    </header>
+                    <div class="row">
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            <field name="avatar" widget="image" class="oe_avatar oe_left"/>
+                        </div>
+                        <div class="oe_title col-md-7 col-sm-7 col-xs-7">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Họ tên" class="oe_inline" required="1"/>
+                            </h1>
+                            <label for="code" string="Mã BN: "/>
+                            <b>
+                                <field name="code"/>
+                            </b>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <button name="action_open_schedule_examine" class="oe_stat_button oe_highlight" icon="fa-calendar" type="object" attrs="{'invisible': [('schedule_examine_count', '=', 0)]}">
+                                <field name="schedule_examine_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                    </div>
+                    <field name="special_customer_ids" invisible="1"/>
+                    <group string="Thông tin chung">
+                        <group>
+                            <field name="birth_day"/>
+                            <field name="phone"/>
+                            <field name="gender"/>
+                            <field name="nation"/>
+                            <field name="customer_type_id"/>
+                        </group>
+                        <group>
+                            <field name="age" force_save="1"/>
+                            <field name="address"/>
+                            <field name="mail"/>
+                            <field name="profession"/>
+                        </group>
+                    </group>
+                    <group string="Thông tin thăm khám">
+                        <group colspan="2">
+                            <button name="action_create_schedule_examine" type="object" string=" Tạo lịch hẹn" class="oe_highlight fa fa-plus"/>
+                        </group>
+                        <group>
+                            <field name="examine_date" readonly="1"/>
+                            <field name="re_examine_date" readonly="1"/>
+                            <field name="medical_history"/>
+                            <field name="allergy"/>
+                        </group>
+                        <group>
+                            <field name="heartbeat"/>
+                            <field name="blood_pressure"/>
+                            <field name="eye_sight"/>
+                            <field name="height"/>
+                            <field name="weigh"/>
+                        </group>
+                    </group>
+                    <field name="note" nolabel="1" placeholder="Ghi chú"/>
+                    <separator string="Hồ sơ khám"/>
+                    <button name="btn_add_examine_history" type="object" string=" Thêm mới" class="oe_highlight fa fa-plus" style="margin: 0px 0px 5px 0px;"/>
+                    <field name="examine_history_ids" readonly="1" nolabel="1">
+                        <tree string="Hồ sơ" decoration-danger="state=='new'" decoration-success="state=='done'">
+                            <field name="examine_date"/>
+                            <field name="medicine_ids" widget="many2many_tags"/>
+                            <field name="amount" widget="monetary" sum="Tổng chi phí" options="{'currency_field': 'currency_id'}"/>
+                            <field name="payment" widget="monetary" sum="Tổng thanh toán" options="{'currency_field': 'currency_id'}"/>
+                            <field name="debt" widget="monetary" sum="Tổng còn nợ" options="{'currency_field': 'currency_id'}"/>
+                            <field name="state" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="active" invisible="1"/>
+                            <button name="btn_edit_examine_history" type="object" string=" Sửa" class="btn btn-success fa fa-pencil-square-o"/>
+                            <button name="btn_confirm_unlink" type="object" string=" Xoá" attrs="{'invisible': [('active', '=' , False)]}" class="btn btn-danger fa fa-trash-o"/>
+                            <button name="btn_done_payment" type="object" class="btn btn-success fa fa-credit-card" string=" Thanh toán" attrs="{'invisible': [('debt', '=' , 0)]}"/>
+                        </tree>
+                        <form string="Hồ sơ">
+                            <header>
+                                <field name="state" widget="statusbar"/>
+                            </header>
+                            <sheet>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <group string="Thông tin chung">
+                                            <field name="sick_persion_id" invisible="1" force_save="1" context="{'sick_persion': True}"/>
+                                            <field name="name"/>
+                                            <field name="doctor_id" attrs="{'readonly': [('state', '!=', 'new')]}" required="1"/>
+                                            <field name="examine_date" required="1" attrs="{'readonly': [('state', '!=', 'new')]}"/>
+                                            <field name="re_examine_date" force_save="1" readonly="1"/>
+                                        </group>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <group string="Bệnh án">
+                                            <field name="content" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                            <field name="diagnose" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                            <field name="message_note_id" attrs="{'readonly': [('state', '=', 'done')]}" options="{'no_open': True}"/>
+                                            <field name="test" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                        </group>
+                                    </div>
+                                </div>
+                                <notebook>
+                                    <page string="Chi phí">
+                                        <field name="medicine_ids" nolabel="1"
+                                               attrs="{'readonly': [('state', '=', 'done')]}">
+                                            <tree editable="bottom">
+                                                <field name="medicine_id" options="{'no_create': True, 'no_open': True}"/>
+                                                <field name="type"/>
+                                                <field name="user_manual"/>
+                                                <field name="quantity"/>
+                                                <field name="unit" options="{'no_create': True, 'no_open': True}"/>
+                                                <field name="price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                                <field name="amount" force_save="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                                <field name="currency_id" invisible="1"/>
+                                            </tree>
+                                            <form>
+                                                <group>
+                                                    <group>
+                                                        <field name="medicine_id"/>
+                                                        <field name="unit" options="{'no_open': True}"/>
+                                                        <field name="price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                                    </group>
+                                                    <group>
+                                                        <field name="type"/>
+                                                        <field name="user_manual"/>
+                                                        <field name="note"/>
+                                                    </group>
+                                                    <field name="currency_id" invisible="1"/>
+                                                </group>
+                                            </form>
+                                        </field>
+                                        <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                            <group colspan="4">
+                                                <field name="note" nolabel="1" placeholder="Ghi chú..."/>
+                                            </group>
+                                            <group class="oe_subtotal_footer oe_right oe_subtotal_footer_separator" colspan="2">
+                                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                                    <label for="amount"/>
+                                                </div>
+                                                <field name="amount" nolabel="1" class="oe_subtotal_footer_separator" readonly="1" force_save="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                                    <label for="payment"/>
+                                                </div>
+                                                <field name="payment" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                                    <label for="debt"/>
+                                                </div>
+                                                <field name="debt" nolabel="1" class="oe_subtotal_footer_separator" readonly="1" force_save="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                            </group>
+                                        </group>
+                                    </page>
+                                    <page string="Thông tin khác">
+                                        <group>
+                                            <group>
+                                                <field name="medical_history" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                                <field name="allergy" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                                <field name="heartbeat" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                                <field name="blood_pressure" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                            </group>
+                                            <group>
+                                                <field name="eye_sight" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                                <field name="height" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                                <field name="weigh" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                            </group>
+                                        </group>
+                                    </page>
+                                    <page string="File Ảnh">
+                                        <group col="1">
+                                            <field name="file_upload" widget="many2many_binary" nolabel="1" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                        </group>
+                                    </page>
+                                </notebook>
+                                <field name="currency_id" invisible="1"/>
+                            </sheet>
+                        </form>
+                    </field>
+                </form>
+            </field>
+        </record>
+
+        <record id="sick_persion_info_search_view" model="ir.ui.view">
+            <field name="name">Thông tin bệnh nhân</field>
+            <field name="model">sick_persion_info</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="customer_type_id"/>
+                    <field name="phone"/>
+                    <field name="code"/>
+                    <field name="count_special" invisible="1"/>
+                    <group expand="0" string="Loại bệnh nhân">
+                        <filter string="Loại bệnh nhân" name="group_type" context="{'group_by':'customer_type_id'}"/>
+                    </group>
+                    <separator/>
+                    <filter string="Là BN đặc biệt" name="special" domain="[('count_special', '>', 0)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_sick_persion_info" model="ir.actions.act_window">
+            <field name="name">Thông tin bệnh nhân</field>
+            <field name="res_model">sick_persion_info</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{'sick_persion': True}</field>
+        </record>
+
+        <record id="action_new_sick_persion_info" model="ir.actions.act_window">
+            <field name="name">Bệnh nhân mới</field>
+            <field name="res_model">sick_persion_info</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'sick_persion': True}</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="seq_sick_persion_info" model="ir.sequence">
+            <field name="name">Thông tin bệnh nhân</field>
+            <field name="code">sick_persion_code</field>
+            <field name="prefix">KH</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

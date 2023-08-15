@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="message_server_config_form_view" model="ir.ui.view">
+            <field name="name">Cấu hình SMS</field>
+            <field name="model">message_server_config</field>
+            <field name="arch" type="xml">
+                <form string="Cấu hình SMS" create="false" delete="false">
+                    <sheet>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="project_id" required="1"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string='Lưu' name="btn_done_ok" type="object" class="btn-primary"/>
+                        <button string="Hủy" class="btn-danger" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_message_server_config" model="ir.actions.server">
+            <field name="name">Cấu hình SMS</field>
+            <field name="model_id" ref="model_message_server_config"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.btn_message_server_config()
+            </field>
+        </record>
+
+        <record id="action_tutorial_document" model="ir.actions.act_url">
+            <field name="name">Tài liệu hướng dẫn</field>
+            <field name="url">
+                https://docs.google.com/document/d/1h4MCHjTL8ZeJcNXqEjGS0TJxRzbFF3DPbBZPRmakN9E/edit?usp=sharing
+            </field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

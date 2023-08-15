@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="medicine_unit_tree_view" model="ir.ui.view">
+            <field name="name">Đơn vị</field>
+            <field name="model">medicine_unit</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" string="Đơn vị" delete="0">
+                    <field name="name" required="1"/>
+                    <field name="active" invisible="1"/>
+                    <button name="btn_confirm_unlink" type="object" class="btn btn-danger fa fa-trash-o"  attrs="{'invisible': [('active', '=' , False)]}" title="Delete"/>
+                </tree>
+            </field>
+        </record>
+<!---->
+        <record id="medicine_unit_search_view" model="ir.ui.view">
+            <field name="name">Đơn vị</field>
+            <field name="model">medicine_unit</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <separator/>
+                    <filter string="Đã ẩn" name="hidden" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_medicine_unit" model="ir.actions.act_window">
+            <field name="name">Đơn vị</field>
+            <field name="res_model">medicine_unit</field>
+            <field name="view_mode">tree</field>
+        </record>
+    </data>
+    <data>
+        <record id="medicine_type_tree_view" model="ir.ui.view">
+            <field name="name">Loại chi phí</field>
+            <field name="model">medicine_type</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" string="Loại chi phí" delete="0">
+                    <field name="name" required="1"/>
+                    <field name="active" invisible="1"/>
+                    <button name="btn_confirm_unlink" type="object"  class="btn btn-danger fa fa-trash-o" attrs="{'invisible': [('active', '=' , False)]}" title="Delete"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="medicine_type_search_view" model="ir.ui.view">
+            <field name="name">Loại chi phí</field>
+            <field name="model">medicine_type</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <separator/>
+                    <filter string="Đã ẩn" name="hidden" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_medicine_type" model="ir.actions.act_window">
+            <field name="name">Loại chi phí</field>
+            <field name="res_model">medicine_type</field>
+            <field name="view_mode">tree</field>
+        </record>
+    </data>
+    <data>
+        <record id="medicine_user_manual_tree_view" model="ir.ui.view">
+            <field name="name">Hướng dẫn sử dụng</field>
+            <field name="model">medicine_user_manual</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" string="Hướng dẫn sử dụng" delete="0">
+                    <field name="name" required="1"/>
+                    <field name="active" invisible="1"/>
+                    <button name="btn_confirm_unlink" type="object" class="btn btn-danger fa fa-trash-o" attrs="{'invisible': [('active', '=' , False)]}" title="Delete"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="medicine_user_manual_search_view" model="ir.ui.view">
+            <field name="name">Hướng dẫn sử dụng</field>
+            <field name="model">medicine_user_manual</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <separator/>
+                    <filter string="Đã ẩn" name="hidden" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_medicine_user_manual" model="ir.actions.act_window">
+            <field name="name">Hướng dẫn sử dụng</field>
+            <field name="res_model">medicine_user_manual</field>
+            <field name="view_mode">tree</field>
+        </record>
+    </data>
+    <data>
+        <record id="customer_type_tree_view" model="ir.ui.view">
+            <field name="name">Loại bệnh nhân</field>
+            <field name="model">customer_type</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" string="Loại bệnh nhân" delete="0">
+                    <field name="name" required="1"/>
+                    <field name="active" invisible="1"/>
+                    <button name="btn_confirm_unlink" type="object" class="btn btn-danger fa fa-trash-o" attrs="{'invisible': [('active', '=' , False)]}" title="Delete"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="customer_type_search_view" model="ir.ui.view">
+            <field name="name">Loại bệnh nhân</field>
+            <field name="model">customer_type</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <separator/>
+                    <filter string="Đã ẩn" name="hidden" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_customer_type" model="ir.actions.act_window">
+            <field name="name">Lời dặn</field>
+            <field name="res_model">customer_type</field>
+            <field name="view_mode">tree</field>
+        </record>
+    </data>
+    <data>
+        <record id="message_note_tree_view" model="ir.ui.view">
+            <field name="name">Lời dặn</field>
+            <field name="model">message_note</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" string="Lời dặn" delete="0">
+                    <field name="name" required="1"/>
+                    <field name="active" invisible="1"/>
+                    <button name="btn_confirm_unlink" type="object" class="btn btn-danger fa fa-trash-o" attrs="{'invisible': [('active', '=' , False)]}" title="Delete"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="message_note_search_view" model="ir.ui.view">
+            <field name="name">Lời dặn</field>
+            <field name="model">message_note</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <separator/>
+                    <filter string="Đã ẩn" name="hidden" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_message_note" model="ir.actions.act_window">
+            <field name="name">Lời dặn</field>
+            <field name="res_model">message_note</field>
+            <field name="view_mode">tree</field>
+        </record>
+    </data>
+</odoo>

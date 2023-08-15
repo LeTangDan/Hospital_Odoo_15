@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="print_receipt">
+        <t t-call="web.basic_layout">
+            <style>
+                .page {
+                font-family: Times New Roman;
+                font-size: 11px;
+                }
+                .font24 {
+                font-size: 24px;
+                }
+                .font18 {
+                font-size: 18px;
+                }
+                .font16 {
+                font-size: 16px;
+                }
+                .font14 {
+                font-size: 14px;
+                }
+                .font13 {
+                font-size: 13px;
+                }
+                .font12 {
+                font-size: 12px;
+                }
+                .x_bold {
+                font-weight: bold;
+                }
+                .x_center {
+                text-align: center;
+                }
+                .x_right {
+                text-align: right;
+                }
+                .x_red {
+                color: red;
+                }
+            </style>
+            <div class="page">
+                <t t-foreach="docs" t-as="o">
+                    <p>
+                        <div>
+                            <img alt="thumb" class="img-fluid" t-attf-src="data:image/*;base64,{{o.company_id.logo}}" style="max-height:100px;max-width:100%;"/>
+                        </div>
+                    </p>
+                    <p>
+                        <div class="row">
+                            <div class="col-8">
+                                <div>ĐỊA CHỈ:
+                                    <span t-field="o.company_id.street"/>
+                                </div>
+                                <div>HOTLINE:
+                                    <span t-field="o.company_id.hotline"/>
+                                </div>
+                            </div>
+                            <div class="col-4 x_bold font16">SỐ PHIẾU:</div>
+                        </div>
+                    </p>
+                    <p>
+                        <div class="font24 x_center x_bold">PHIẾU DỊCH VỤ</div>
+                    </p>
+                    <p>
+                        <div class="row font14">
+                            <div class="col-6">Họ tên:
+                                <span t-field="o.sick_persion_id.name"/>
+                            </div>
+                            <div class="col-2">Tuổi:
+                                <span t-field="o.sick_persion_id.age"/>
+                            </div>
+                            <div class="col-4">Sđt:
+                                <span t-field="o.sick_persion_id.phone"/>
+                            </div>
+                        </div>
+                        <div class="row font12">
+                            <div class="col-6">Ngày khám:
+                                <span t-field="o.examine_date"/>
+                            </div>
+                            <div class="col-6">Ngày tái khám:
+                                <span t-field="o.re_examine_date"/>
+                            </div>
+                        </div>
+                        <div class="row font12">
+                            <div class="col-12">Nội dung khám:
+                                <span t-field="o.content"/>
+                            </div>
+                        </div>
+                    </p>
+                    <div>
+                        <t t-if="o.medicine_ids">
+                            <table class="table">
+                                <col style="width:45%"/>
+                                <col style="width:15%"/>
+                                <col style="width:20%"/>
+                                <col style="width:20%"/>
+                                <tbody>
+                                    <tr class="x_bold x_center font12">
+                                        <td>Tên chi phí</td>
+                                        <td>SL/ĐVT</td>
+                                        <td>Đơn giá</td>
+                                        <td>Thành tiền</td>
+                                    </tr>
+                                    <t t-foreach="o.medicine_ids" t-as="medicine">
+                                        <tr>
+                                            <td>
+                                                <span t-field="medicine.medicine_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="medicine.quantity"/>
+                                                <span t-field="medicine.unit.name"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="medicine.price"/>
+                                                <span t-field="o.currency_id.symbol"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="medicine.amount"/>
+                                                <span t-field="o.currency_id.symbol"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                    </div>
+                    <div class="x_bold x_right font16">
+                        <div>Tổng cộng:
+                            <span t-field="o.amount"/>
+                            <span t-field="o.currency_id.symbol"/>
+                        </div>
+                        <div>Tổng thanh toán:
+                            <span t-field="o.payment"/>
+                            <span t-field="o.currency_id.symbol"/>
+                        </div>
+                        <div>Còn nợ:
+                            <span t-field="o.debt"/>
+                            <span t-field="o.currency_id.symbol"/>
+                        </div>
+                    </div>
+                    <div class="x_bold font18">BS:
+                        <span t-field="o.doctor_id"/>
+                    </div>
+                    <div class="row font13">
+                        <div class="col-6">
+                            <div class="font16 x_bold">Thông tin thanh toán</div>
+                            <span t-field="o.company_id.payment_info"/>
+                        </div>
+                        <div class="col-6">
+                            <div/>
+                            <div>
+                                <b>Liên hệ:</b>
+                                <span t-field="o.company_id.phone"/>
+                            </div>
+                            <div>
+                                <b>Gmail:</b>
+                                <span t-field="o.company_id.email"/>
+                            </div>
+                            <div>
+                                <b>Địa chỉ:</b>
+                                <span t-field="o.company_id.street"/>
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        <div class="x_center x_red font16">
+                            <span t-field="o.company_id.note_x"/>
+                        </div>
+                    </p>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

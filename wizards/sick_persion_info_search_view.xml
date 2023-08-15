@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="sick_persion_info_search_form_view" model="ir.ui.view">
+            <field name="name">Lọc hồ sơ</field>
+            <field name="model">sick_persion_info_search</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group col="4">
+                            <field name="state"/>
+                            <field name="from_date" nolabel="1" attrs="{'required': [('state', '!=', 'tc')], 'invisible': [('state', '=', 'tc')]}"/>
+                            <field name="to_date" nolabel="1" attrs="{'required': [('state', '=', 'tk')], 'invisible': [('state', '!=', 'tk')]}"/>
+                        </group>
+                        <group col="1">
+                            <field name="customer_ids" widget="many2many_tags" context="{'sick_persion': True}"/>
+                        </group>
+                        <group col="1">
+                            <field name="doctor_ids" widget="many2many_tags"/>
+                        </group>
+                        <field name="name" invisible="1"/>
+                        <footer>
+                            <button string="Tìm" name="btn_search" type="object" class="oe_highlight"/>
+                            <button string="Hủy" class="btn-danger" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sick_persion_info_search" model="ir.actions.act_window">
+            <field name="name">Hồ sơ</field>
+            <field name="res_model">sick_persion_info_search</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'view_action': 'hospital_management.action_examine_history_info', 'date': 'examine_date'}</field>
+        </record>
+
+        <record id="action_payment_history_search" model="ir.actions.act_window">
+            <field name="name">Báo cáo thu chi</field>
+            <field name="res_model">sick_persion_info_search</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'view_action': 'hospital_management.payment_history_action', 'date': 'date'}</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="cron_job_auto_sent_msg" model="ir.cron">
+            <field name="name">Auto Sent SMS</field>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="model_message_server_config"/>
+            <field name="state">code</field>
+            <field name="code">model.auto_sent_message()</field>
+        </record>
+
+    </data>
+</odoo>

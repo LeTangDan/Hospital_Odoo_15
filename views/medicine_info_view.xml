@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="medicine_info_tree_view" model="ir.ui.view">
+            <field name="name">Thông tin chi phí</field>
+            <field name="model">medicine_info</field>
+            <field name="arch" type="xml">
+                <tree string="Thông tin chi phí" delete="0">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="type"/>
+                    <field name="unit"/>
+                    <field name="price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="active" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <button name="btn_confirm_unlink" type="object" class="btn btn-danger fa fa-trash-o" attrs="{'invisible': [('active', '=' , False)]}" title="Delete"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="medicine_info_form_view" model="ir.ui.view">
+            <field name="name">Thông tin chi phí</field>
+            <field name="model">medicine_info</field>
+            <field name="arch" type="xml">
+                <form string="Thông tin chi phí" delete="0">
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="code" required="1"/>
+                            <field name="unit" required="1"/>
+                            <field name="price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="type" required="1"/>
+                            <field name="user_manual"/>
+                            <field name="note"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="medicine_info_search_view" model="ir.ui.view">
+            <field name="name">Thông tin chi phí</field>
+            <field name="model">medicine_info</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="unit"/>
+                    <field name="price"/>
+                    <field name="type"/>
+                    <group expand="0" string="Loại chi phí">
+                        <filter string="Loại chi phí" name="group_type" context="{'group_by':'type'}"/>
+                    </group>
+                    <separator/>
+                    <filter string="Đã ẩn" name="hidden" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_medicine_info" model="ir.actions.act_window">
+            <field name="name">Thông tin chi phí</field>
+            <field name="res_model">medicine_info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+        </record>
+
+    </data>
+</odoo>
