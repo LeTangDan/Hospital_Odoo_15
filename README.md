@@ -1,6 +1,6 @@
 1. Patients model & view
- ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/820827ff-3e42-41bb-8a82-9f76160e1e26)
- ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/8b353291-1b4d-4403-9d99-905e499ea50f)
+ ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/aea89e2d-52e9-43ac-80d9-d42e867a7895)
+ ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/9d5fd2d0-8443-4bc6-b33b-29bc03b406e0)
  ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/636f4004-c95b-41bd-a468-aa2b0c45e127)
 2. patient records
  ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/aec1c9c4-147d-4f97-a153-73680e92f589)
