@@ -48,32 +48,38 @@ Create a hospital management module which has 10 menus for: Hồ sơ mới, Hồ
 
     Create an appointment with the button "TẠO LỊCH HẸN"
    ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/01096346-1060-4764-ad67-3c6b27f785ad)
+
    generate a lead with the button "TẠO BN TIỀM NĂNG"
    ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/c7d8b351-903a-43d1-bdde-d731ba58d108)
+
    List of potential patients can be viewed at Menu "Bệnh nhân tiềm năng"
    ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/ab2c950f-872f-4c22-91fa-e849aed8b3a1)
-   Create special patient with button "TẠO BN ĐẶC BIỆT"
+
+    Create special patient with button "TẠO BN ĐẶC BIỆT"
+
    The list of special patients can be viewed at Menu "Bệnh nhân đặc biệt"
    ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/2edc21d5-b635-4328-baf4-f8057b3efe45)
+
    Cost generated from view tree
    ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/8ed5e01f-e26b-4a14-a41f-cfe3b7f597d6)
-   other information is taken from the "Bệnh nhân" information, if not already, can be entered manually and the information will be transmitted to "Bệnh nhân"
+
+    other information is taken from the "Bệnh nhân" information, if not already, can be entered manually and the information will be transmitted to "Bệnh nhân"
    ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/981eb899-0f26-4733-aab7-cb5645602ad5)
 
-5. Menu "Hồ sơ"
+6. Menu "Hồ sơ"
 
     find medical history
    ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/f6888e57-0f09-4689-96c7-6f92f789b9cc)
    ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/53e1f28b-358e-490a-ae8c-ebf269c8a542)
 
-6. Menu "Gửi lịch hẹn" used to create an appointment
+7. Menu "Gửi lịch hẹn" used to create an appointment
   ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/ce583319-3c96-4663-b50d-5934131e6d63)
    ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/766e54a0-d7bd-403c-af46-d261933b579d)
 
-7. Menu "Lịch hẹn"
+8. Menu "Lịch hẹn"
    ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/b3fe303e-ea93-4211-ad10-23e51db7ecc2)
 
-8. Menu "Báo cáo thu chi"
+9. Menu "Báo cáo thu chi"
 
    Total cost of a patient's examination
    ![image](https://github.com/LeTangDan/Hospital_Odoo_16/assets/137615576/d25ab0bc-e31d-41a9-a374-37bae57fcf95)
