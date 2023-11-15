@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <menuitem name="Phòng khám"
+                  id="menu_hospital_management_root_id"
+                  sequence="1"
+                  web_icon="hospital_management,static/description/icon.png"
+                  />
+
+        <!--=================================================-->
+        <menuitem id="menu_action_new_examine_history_info"
+                  name="Hồ sơ mới"
+                  parent="menu_hospital_management_root_id"
+                  action="action_new_examine_history_info"
+                  sequence="0"/>
+
+
+        <!--=================================================-->
+        <menuitem id="menu_action_sick_persion_info_search"
+                  name="Hồ sơ"
+                  parent="menu_hospital_management_root_id"
+                  action="action_sick_persion_info_search"
+
+                  sequence="15"/>
+        <!--=================================================-->
+        <menuitem id="menu_action_examine_history_info"
+                  name="Hồ sơ X"
+                  parent="menu_hospital_management_root_id"
+                  action="action_examine_history_info"
+
+                  sequence="20"/>
+
+        <!--=================================================-->
+        <menuitem id="menu_action_payment_history_search"
+                  parent="menu_hospital_management_root_id"
+                  action="action_payment_history_search"
+
+                  sequence="17"/>
+
+        <menuitem id="menu_action_schedule_examine"
+                  name="Lịch hẹn"
+                  parent="menu_hospital_management_root_id"
+                  action="action_schedule_examine"
+
+                  sequence="20"/>
+
+        <!--=================================================-->
+        <menuitem id="menu_potential_patient_action"
+                  name="Bệnh nhân tiềm năng"
+                  parent="menu_hospital_management_root_id"
+
+                  action="potential_patient_action"
+                  sequence="40"/>
+        <menuitem id="menu_action_sick_persion_info"
+                  name="Bệnh nhân"
+                  parent="menu_hospital_management_root_id"
+                  action="action_sick_persion_info"
+
+                  sequence="42"/>
+        <menuitem id="menu_action_special_customer"
+                  name="Bệnh nhân đặc biệt"
+                  parent="menu_hospital_management_root_id"
+
+                  action="action_special_customer"
+                  sequence="44"/>
+
+        <menuitem id="menu_action_doctor_info"
+                  name="Bác sĩ"
+                  parent="menu_hospital_management_root_id"
+                  action="action_doctor_info"
+
+                  sequence="46"/>
+
+        <!--=================================================-->
+        <menuitem id="menu_config_medicine_info_root"
+                  name="Chi phí"
+                  parent="menu_hospital_management_root_id"
+
+                  sequence="50"/>
+        <menuitem id="menu_action_medicine_info"
+                  name="Chi phí"
+                  parent="menu_config_medicine_info_root"
+                  action="action_medicine_info"
+
+                  sequence="0"/>
+        <menuitem id="menu_action_medicine_unit"
+                  name="Đơn vị tính"
+                  parent="menu_config_medicine_info_root"
+                  action="action_medicine_unit"
+                  sequence="1"/>
+        <menuitem id="menu_action_medicine_type"
+                  name="Loại chi phí"
+                  parent="menu_config_medicine_info_root"
+                  action="action_medicine_type"
+                  sequence="2"/>
+        <menuitem id="menu_action_medicine_user_manual"
+                  name="Hướng dẫn sử dụng"
+                  parent="menu_config_medicine_info_root"
+                  action="action_medicine_user_manual"
+                  sequence="3"/>
+
+
+        <!--=================================================-->
+        <menuitem id="menu_message_server_config"
+                  name="Cấu hình"
+                  parent="menu_hospital_management_root_id"
+
+                  sequence="64"/>
+        <menuitem id="menu_action_hospital_info_config"
+                  name="Thông tin phòng khám"
+                  parent="menu_message_server_config"
+                  action="action_res_company_inherit"
+
+                  sequence="21"/>
+        <menuitem id="menu_view_paper_format_custom"
+                  name="Định dạng phiếu in"
+                  parent="menu_message_server_config"
+                  action="view_paper_format_custom"
+
+                  sequence="25"/>
+
+    </data>
+</openerp>
