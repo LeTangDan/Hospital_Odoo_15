@@ -65,14 +65,3 @@ class CustomerType(models.Model):
     _sql_constraints = [('name_uniq', 'unique(name)', 'Tên loại đã tồn tại!')]
 
 
-class MessageNote(models.Model):
-    _name = 'message_note'
-    _rec_name = 'name'
-    _description = 'Message Note'
-    _inherit = ['delete_record', 'active_field']
-    _default_name = 'Xác nhận xóa Lời dặn'
-    _inactive = True
-
-    name = fields.Char(string="Lời dặn")
-
-    _sql_constraints = [('name_uniq', 'unique(name)', 'Lời dặn đã tồn tại!')]

@@ -9,7 +9,9 @@ class ConfirmMsgUnlink(models.TransientModel):
 
     def btn_unlink(self):
         _model = self.env.context.get('active_model', False)
+        print(_model)
         _id = self.env.context.get('active_id', False)
+        print(_id)
         if _model and _id:
             self.env[_model].search([('id', '=', _id)], limit=1).with_context(inactive=self._context.get('inactive', False)).unlink()
         return {'type': 'ir.actions.act_window_close'}

@@ -46,7 +46,6 @@ class ExamineHistoryInfo(models.Model):
     debt = fields.Float(string="Còn nợ", digits=(16, 0))
     currency_id = fields.Many2one('res.currency', string='Tiền tệ', default=lambda f: f.env.company.currency_id.id)
 
-    message_note_id = fields.Many2one(comodel_name="message_note", string="Lời dặn", ondelete="restrict")
     active = fields.Boolean(string="Active", default=True)
     schedule_examine_count = fields.Integer(string="Lịch hẹn", compute='_compute_schedule_examine_count')
 
@@ -80,7 +79,10 @@ class ExamineHistoryInfo(models.Model):
     @api.onchange('sick_persion_id')
     def onchange_sick_persion_id(self):
         if self.sick_persion_id:
+            # print(self.sick_persion_id)
             self.medical_history = self.sick_persion_id.medical_history
+            # print(self.sick_persion_id.medical_history)
+            # print(self.medical_history)
             self.allergy = self.sick_persion_id.allergy
             self.heartbeat = self.sick_persion_id.heartbeat
             self.blood_pressure = self.sick_persion_id.blood_pressure
@@ -90,6 +92,7 @@ class ExamineHistoryInfo(models.Model):
             self.special_customer_id = self.sick_persion_id.special_customer_ids[0] if self.sick_persion_id.special_customer_ids else False
 
     def btn_synchronize_medical_records(self):
+        # print(self, 'baka')
         _val_sick_persion = {
             'medical_history': self.medical_history,
             'allergy': self.allergy,
@@ -135,6 +138,7 @@ class ExamineHistoryInfo(models.Model):
         return result
 
     def convert_number(self, number=''):
+        print(number)
         check = False
         if '-' in number:
             check = True
@@ -179,6 +183,7 @@ class ExamineHistoryInfo(models.Model):
         ctx = dict(self._context)
         ctx.update({
             'default_doctor_id': self.doctor_id.id,
+            # 'default_doctor_id': self.doctor_id,
             'default_amount': self.debt,
             'default_examine_line_id': self.id,
         })

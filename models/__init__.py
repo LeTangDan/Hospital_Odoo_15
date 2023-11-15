@@ -5,7 +5,6 @@ from . import payment_history
 from . import medicine_info
 from . import doctor_info
 from . import schedule_examine
-from . import message_server_config
 from . import master_data
 from . import res_company
 from . import special_customer

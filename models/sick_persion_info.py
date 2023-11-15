@@ -106,8 +106,14 @@ class SickPersionInfo(models.Model):
 
     def _compute_schedule_examine_count(self):
         schedule_examine = self.env['schedule_examine'].search([('sick_persion_id', 'in', self.ids)])
+        # print(self.ids)
+        # print(schedule_examine) == [13, 12, 11]
+        # print(schedule_examine.id) ở đây không sai tại vì print(schedule_examine) == [13, 12, 11] là id của schedule_examine rồi
         for line in self:
             line.schedule_examine_count = len(schedule_examine.filtered(lambda f: f.sick_persion_id.id == line.id))
+            print(self.ids)
+            print(line.id)
+            # print(schedule_examine.id)
 
     def action_open_schedule_examine(self):
         schedule_examine = self.env['schedule_examine'].search([('sick_persion_id', 'in', self.ids)])
@@ -168,6 +174,7 @@ class SickPersionInfo(models.Model):
     def btn_add_examine_history(self):
         self.ensure_one()
         view_id = self.env.ref('hospital_management.examine_history_info_form_view')
+        print(view_id.id, 1000)
         ctx = dict(
             default_sick_persion_id=self.id,
             default_medical_history=self.medical_history,

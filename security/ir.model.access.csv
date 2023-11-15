@@ -10,14 +10,11 @@ access_medicine_type,hospital_management.medicine_type,hospital_management.model
 access_medicine_user_manual,hospital_management.medicine_user_manual,hospital_management.model_medicine_user_manual,,1,1,1,1
 access_medicine_unit,hospital_management.medicine_unit,hospital_management.model_medicine_unit,,1,1,1,1
 access_schedule_examine,hospital_management.schedule_examine,hospital_management.model_schedule_examine,,1,1,1,1
-access_message_server_config,hospital_management.message_server_config,hospital_management.model_message_server_config,,1,1,1,1
 access_res_company_config,hospital_management.res_company_config,hospital_management.model_res_company,,1,1,1,1
 access_res_partner_config,hospital_management.res_partner_config,hospital_management.model_res_partner,,1,1,1,1
-access_send_msg_wizard,hospital_management.send_msg_wizard,hospital_management.model_send_msg_wizard,,1,1,1,1
 access_sick_persion_info_search,hospital_management.sick_persion_info_search,hospital_management.model_sick_persion_info_search,,1,1,1,1
 access_confirm_msg_unlink,hospital_management.confirm_msg_unlink,hospital_management.model_confirm_msg_unlink,,1,1,1,1
 access_special_customer,hospital_management.special_customer,hospital_management.model_special_customer,,1,1,1,1
 access_potential_patient,hospital_management.potential_patient,hospital_management.model_potential_patient,,1,1,1,1
 access_customer_type,hospital_management.customer_type,hospital_management.model_customer_type,,1,1,1,1
-access_message_note,hospital_management.message_note,hospital_management.model_message_note,,1,1,1,1
 access_report.paperformat,hospital_management.report.paperformat,hospital_management.model_report_paperformat,,1,1,0,0

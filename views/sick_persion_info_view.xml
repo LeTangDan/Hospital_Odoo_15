@@ -91,7 +91,8 @@
                             </button>
                         </div>
                     </div>
-                    <field name="special_customer_ids" invisible="1"/>
+                    <field name="special_customer_ids"/>
+<!--                    <field name="special_customer_ids" invisible="1"/>-->
                     <group string="Thông tin chung">
                         <group>
                             <field name="birth_day"/>
@@ -161,7 +162,6 @@
                                         <group string="Bệnh án">
                                             <field name="content" attrs="{'readonly': [('state', '=', 'done')]}"/>
                                             <field name="diagnose" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                                            <field name="message_note_id" attrs="{'readonly': [('state', '=', 'done')]}" options="{'no_open': True}"/>
                                             <field name="test" attrs="{'readonly': [('state', '=', 'done')]}"/>
                                         </group>
                                     </div>

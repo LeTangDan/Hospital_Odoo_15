@@ -106,6 +106,7 @@
                             <field name="date"/>
                             <field name="doctor_id"/>
                             <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="examine_line_id"/>
                             <field name="currency_id" invisible="1"/>
                             <field name="examine_line_id" invisible="1"/>
                         </group>

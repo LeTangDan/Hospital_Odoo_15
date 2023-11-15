@@ -44,7 +44,9 @@ class PaymentHistory(models.Model):
 
     def write(self, values):
         res = super().write(values)
+        # res ở đây là True/False nên không truy cập được các trường
         for line in self.mapped('examine_line_id'):
+            print(line, 1000)
             payment = sum(line.mapped('payment_history_ids.amount'))
             line.write({
                 'payment': payment,
@@ -55,8 +57,13 @@ class PaymentHistory(models.Model):
     @api.model_create_multi
     def create(self, values):
         res = super().create(values)
+        # res ở đây là 1 bản ghi còn self chỉ đại diện cho mô hình và chưa có giá trị gì
         for line in res.mapped('examine_line_id'):
+            print(line, 100)
             payment = sum(line.mapped('payment_history_ids.amount'))
+            # payment = sum(line.payment_history_ids.filtered(lambda ph: ph.create_date == res.create_date).mapped('amount'))
+
+            print(line.mapped('payment_history_ids.amount'))
             line.write({
                 'payment': payment,
                 'debt': line.amount - payment,
