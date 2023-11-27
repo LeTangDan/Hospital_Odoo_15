@@ -20,16 +20,16 @@ class DoctorInfo(models.Model):
     _description = 'Bác sĩ'
 
     avatar = fields.Binary(string="Ảnh đại diện", attachment=True, default=lib_default_avatar._default_image())
-    name = fields.Char(string=u'Họ tên', copy=False)
+    name = fields.Char(string='Họ tên', copy=False)
     code = fields.Char(string="Mã số", readonly=True, default='New')
     birth = fields.Selection(string="Năm sinh", selection=_birth)
-    degree = fields.Char(string=u'Học vị/cấp bậc')
-    position = fields.Char(string=u'Chức vụ')
-    major = fields.Char(string=u'Chuyên khoa')
-    phone = fields.Char(string=u'Điện thoại')
-    mail = fields.Char(string=u'Mail')
-    address = fields.Char(string=u'Địa chỉ')
-    exper = fields.Selection(string=u'Số năm kinh nghiệm', selection=_exper)
+    degree = fields.Char(string='Học vị/cấp bậc')
+    position = fields.Char(string='Chức vụ')
+    major = fields.Char(string='Chuyên khoa')
+    phone = fields.Char(string='Điện thoại')
+    mail = fields.Char(string='Mail')
+    address = fields.Char(string='Địa chỉ')
+    exper = fields.Selection(string='Số năm kinh nghiệm', selection=_exper)
 
     _sql_constraints = [('name', 'unique(name, company_id)', 'Tên đã tồn tại!')]
 
