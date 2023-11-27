@@ -70,7 +70,7 @@ class SickPersionInfo(models.Model):
     # Thông tin chung
     avatar = fields.Binary(string="Ảnh đại diện", attachment=True, default=lib_default_avatar._default_image())
     code = fields.Char(string="Mã bệnh nhân", readonly=True, default='New')
-    name = fields.Char(string=u'Họ tên')
+    name = fields.Char(string='Họ tên')
     gender = fields.Selection(string="Giới tính", default="nam", selection=_gender)
     nation = fields.Selection(string="Dân tộc", selection=_nation, default="1")
     age = fields.Integer(string="Tuổi", compute='_compute_age', store=True)
